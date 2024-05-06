@@ -8,6 +8,7 @@ import sys
 import argparse
 import requests
 import json
+import os
 
 tzinfo = {
     "CEST": 2 * 3600,
@@ -44,7 +45,7 @@ def get_data(args):
 
 def upload_data(data):
     database="elektrina"
-    client = InfluxDBClient(host="cml.lan", port=8086)
+    client = InfluxDBClient(host=os.environ["DOCKER_IP"], port=8086)
     client.create_database(database)
     client.switch_database(database)
 
